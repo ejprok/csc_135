@@ -15,7 +15,10 @@ public class Recognizer {
 
     public void function() {
         match("B");
-
+        String characters = "XYZIWROC"
+        if (characters.indexOf(token) >= 0) {
+            statement();
+        }
     }
 
     public void statement() {
