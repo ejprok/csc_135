@@ -1,3 +1,15 @@
+/*
+    Edward Prokopik
+    CSC 135
+
+    Test Cases:
+        B$
+        BX~0;$
+        BI(123>1432)@&$
+
+
+*/
+
 import java.util.Scanner; 
 public class Recognizer {
 
@@ -46,10 +58,14 @@ public class Recognizer {
             return true;
         } else {
             // token not matched
-            System.out.println("Invalid String");
-            System.exit(1);
+            error();
             return false;
         }
+    }
+
+    public static void error() {
+        System.out.println("Invalid String");
+        // System.exit(1);
     }
 
     public static boolean tokenIn(String chars) {
@@ -69,11 +85,14 @@ public class Recognizer {
     public static void function() {
         match('B');
         while (tokenIn(FIRST_OF_STATEMT)) {
+            System.out.println("hey");
             statemt();
         }
 
         if (token == '$') {
             match('$');
+        } else if (token != 'E') {
+            error();
         }
     }
 
@@ -132,28 +151,23 @@ public class Recognizer {
     public static void read() {
         match('R');
         ident();
-        if (token == ',') {
-            while(token == ',') {
-                match(',');
-                ident();
-            }
-        } else {
-            match(';');
+        while(token == ',') {
+            match(',');
+            ident();
         }
+        match(';');
+        
 
     }
 
     public static void output() {
         match('O');
         ident();
-        if (token == ',') {
-            while(token == ',') {
-                match(',');
-                ident();
-            }
-        } else {
-            match(';');
+        while(token == ',') {
+            match(',');
+            ident();
         }
+        match(';');
     }
 
     public static void funcall() {
