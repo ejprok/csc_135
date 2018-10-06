@@ -2,10 +2,28 @@
     Edward Prokopik
     CSC 135
 
+    To Run:
+        javac Recognizer.java
+        java Recognizer
+
     Test Cases:
-        B$
-        BX~0;$
-        BI(123>1432)@&$
+
+        Valid:
+            B$
+            BX~0;$
+            BI(123>1432)@&$
+            BW(0=X)LRXZ,Z;T$
+            BCBX5~(Y+Z*1234);E$
+            
+
+        Invalid
+            a$
+            Ba$
+            BC$
+            B@()$
+            BW(X<X;$
+            BCBX5(Y+Z*1234);E$
+
 
 
 */
@@ -44,7 +62,7 @@ public class Recognizer {
         count = 0;
         token = grammar_chars[0];
         function();
-        System.out.println("Valid String");
+        System.out.println("legal");
 
 
     }
@@ -64,8 +82,9 @@ public class Recognizer {
     }
 
     public static void error() {
-        System.out.println("Invalid String");
-        // System.exit(1);
+        System.out.println("errors found");
+        System.out.println("Last token: " + token);
+        System.exit(1);
     }
 
     public static boolean tokenIn(String chars) {
@@ -85,7 +104,6 @@ public class Recognizer {
     public static void function() {
         match('B');
         while (tokenIn(FIRST_OF_STATEMT)) {
-            System.out.println("hey");
             statemt();
         }
 
